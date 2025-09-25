@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jovian Careers</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="site-title">Jovian Careers</h1>
+            <img class="banner" src="{{ url_for('static', filename='banner.jpg') }}" alt="welcome">
+        </header>
+
+        <section class="intro">
+            <p class="intro-text">Hello there! You'll learn about job openings at Jovian</p>
+        </section>
+
+        <section class="about">
+            <h2 class="section-title">About Jovian</h2>
+            <p class="about-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+                incididunt ut
+                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat nulla
+                pariatur.</p>
+        </section>
+
+        <section class="jobs">
+            <h2 class="section-title">Open Positions</h2>
+            <div class="jobs-text">
+                {% for job in jobs%}
+                <div>
+                    <h3>{{job['title']}}</h3>
+                </div>
+                <div>
+                    <b>Location: </b>{{job['location']}}
+                </div>
+                {% if 'salary' in job%}
+                <div>
+                    <b>Salary: </b>${{job['salary']}}
+                </div>
+                {% endif %}
+                <br>
+                {% endfor %}
+            </div>
+        </section>
+
+        <footer class="footer">
+            <button class="contact-btn">Contact Us</button>
+        </footer>
+    </div>
+</body>
+
+</html>
