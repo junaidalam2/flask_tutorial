@@ -1,39 +1,39 @@
-{% extends "bootstrap/base.html" %}
+{% extends "base.html" %}
 
 {% block title %}
 Jovian Careers
 {% endblock %}
 
 {% block styles %}
-{{ super() }}
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 {% endblock %}
 
 {% block content %}
+{% include 'nav.html' %}
+
 <div class="container">
-    <header class="header text-center my-4">
-        <h1 class="site-title text-primary">Jovian Careers</h1>
-        <img class="banner img-fluid" src="{{ url_for('static', filename='banner.jpg') }}" alt="welcome">
-    </header>
 
-    <section class="intro mb-4">
-        <p class="intro-text">Hello there! You'll learn about job openings at Jovian</p>
-    </section>
+    <div class="pt-5 mt-3">
+        <header class="header text-center my-4">
+            <h1 class="site-title text-primary">Jovian Careers</h1>
+            <img class="banner img-fluid" src="{{ url_for('static', filename='banner.jpg') }}" alt="welcome">
+        </header>
 
-    <section class="about mb-5">
-        <h2 class="section-title">About Jovian</h2>
-        <p class="about-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-    </section>
+        <section class="about mb-5">
+            <h2 class="section-title">About Jovian</h2>
+            <p class="about-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+        </section>
 
-    <section class="jobs">
-        <h2 class="section-title mb-4">Open Positions</h2>
-        {% for job in jobs %}
-        {% include 'jobitem.html' %}
-        {% endfor %}
-    </section>
+        <section class="jobs">
+            <h2 class="section-title mb-4">Open Positions</h2>
+            {% for job in jobs %}
+            {% include 'jobitem.html' %}
+            {% endfor %}
+        </section>
 
-    <footer class="footer mt-5 text-center">
-        <button class="btn btn-success">Contact Us</button>
-    </footer>
+        <footer class="footer mt-5 text-center">
+            <button class="btn btn-success">Contact Us</button>
+        </footer>
+    </div>
 </div>
 {% endblock %}
