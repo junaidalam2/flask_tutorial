@@ -1,6 +1,9 @@
 from flask import Flask, render_template, jsonify
 
 app = Flask(__name__)
+app.config['DEBUG'] = True
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://user:pass@localhost/dbname'
+
 
 JOBS = [
     {
