@@ -1,10 +1,8 @@
+from dotenv import load_dotenv
+load_dotenv()
 from flask import Flask, render_template, jsonify
 from config import Config
 from extensions import db, migrate
-from dotenv import load_dotenv
-load_dotenv()
-
-import models 
 
 
 
@@ -15,7 +13,7 @@ def create_app():
       db.init_app(app)
       migrate.init_app(app, db)
 
-      Job = models.Job 
+      from models import Job 
 
       # JOBS = [
       # {
