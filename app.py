@@ -3,7 +3,7 @@ load_dotenv()
 from flask import Flask, render_template, jsonify
 from config import Config
 from extensions import db, migrate
-
+from models import Job  
 
 
 def create_app():
@@ -13,7 +13,34 @@ def create_app():
       db.init_app(app)
       migrate.init_app(app, db)
 
-      from models import Job 
+      
+
+      @app.route("/")
+      def hello_world():
+            jobs = Job.query.all()
+            return render_template('home.html', jobs=jobs)
+
+      @app.route("/api/jobs")
+      def list_jobs():
+            jobs = Job.query.all()
+            jobs_list = [
+                  {
+                  "id": job.id,
+                  "title": job.title,
+                  "location": job.location,
+                  "salary": job.salary,
+                  } for job in jobs
+            ]
+            return jsonify(jobs_list)
+
+      return app
+
+
+if __name__ == "__main__":
+        app = create_app()
+        app.run(host='0.0.0.0', debug=True)
+
+
 
       # JOBS = [
       # {
@@ -39,29 +66,3 @@ def create_app():
       #       'location': 'Houston, Texas',
       # },
       # ]
-
-      @app.route("/")
-      def hello_world():
-            jobs = Job.query.all()
-            return render_template('home.html', jobs=jobs)
-
-      @app.route("/api/jobs")
-      def list_jobs():
-            jobs = Job.query.all()
-            jobs_list = [
-                  {
-                  "id": job.id,
-                  "title": job.title,
-                  "location": job.location,
-                  "salary": job.salary,
-                  } for job in jobs
-            ]
-            return jsonify(jobs_list)
-
-
-      return app
-
-
-if __name__ == "__main__":
-        app = create_app()
-        app.run(host='0.0.0.0', debug=True)
