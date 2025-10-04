@@ -1,5 +1,7 @@
 from dotenv import load_dotenv
 load_dotenv()
+import os
+print("DATABASE_URL =", os.getenv("DATABASE_URL"))
 from flask import Flask, render_template, jsonify
 from config import Config
 from extensions import db, migrate
@@ -12,8 +14,6 @@ def create_app():
 
       db.init_app(app)
       migrate.init_app(app, db)
-
-      
 
       @app.route("/")
       def hello_world():
